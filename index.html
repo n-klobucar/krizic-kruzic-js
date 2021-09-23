@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf8">
+    <title>Križić Kružić</title>
+</head>
+
+<body>
+    <!-- <div style="padding-left: 40%; padding-top: 20%;">
+        <h2 id="gej" style=" width: fit-content;" onmouseenter="this.innerHTML = 'Uređeni tekst!'" onmouseleave="this.innerHTML = 'Nakon uređenja Javascriptom!'">Prije ikakve interakcije</h2>
+    </div> -->
+
+    <!--<script src="akcije.js"></script>-->
+
+    <style>
+        table,
+        tr,
+        th,
+        td {
+            border: 2px solid black;
+        }
+        
+        td {
+            background-color: white;
+        }
+        
+        td:hover {
+            cursor: pointer;
+        }
+    </style>
+
+    <script>
+        // var širina = screen.availWidth;
+        // var visina = screen.availHeight;
+        // alert("širina: " + širina);
+        // alert("visina: " + visina);
+        // var tablica = document.getElementById("tablica");
+        // // tablica.setAttribute("height") = visina;
+        // // tablica.setAttribute("width") = širina;
+        // // tablica.style.width = širina + "px";
+        // // tablica.style.height = screen.height;
+        // // // tablica.scrollIntoView("align");
+        // document.getElementById("tablica").style.width = "1080px";
+
+        var gameOver = false;
+        var redIgrača = 1;
+        var povijestOdabira = {};
+        var poruka = "";
+
+        // document.getElementById("tablica").scrollIntoView(alignTo = false);
+
+        if (screen.width.valueOf < 1085) {
+            document.getElementById("tablica").style.width = screen.availWidth.valueOf;
+        }
+
+        document.getElementById("tablica").focus();
+
+        function provjeraStanja() {
+            //vodoravne pobijede
+            if (povijestOdabira[1] == 1 && povijestOdabira[2] == 1 && povijestOdabira[3] == 1) {
+                poruka = "Plavi je pobijedio!!";
+                gameOver = true;
+            } else if (povijestOdabira[1] == 0 && povijestOdabira[2] == 0 && povijestOdabira[3] == 0) {
+                poruka = "Crveni je pobijedio!!";
+                gameOver = true;
+            } else if (povijestOdabira[4] == 1 && povijestOdabira[5] == 1 && povijestOdabira[6] == 1) {
+                poruka = "Plavi je pobijedio!!";
+                gameOver = true;
+            } else if (povijestOdabira[4] == 0 && povijestOdabira[5] == 0 && povijestOdabira[6] == 0) {
+                poruka = "Crveni je pobijedio!!";
+                gameOver = true;
+            } else if (povijestOdabira[7] == 1 && povijestOdabira[8] == 1 && povijestOdabira[9] == 1) {
+                poruka = "Plavi je pobijedio!!";
+                gameOver = true;
+            } else if (povijestOdabira[7] == 0 && povijestOdabira[8] == 0 && povijestOdabira[9] == 0) {
+                poruka = "Crveni je pobijedio!!";
+                gameOver = true;
+            }
+            // okomite pobjede
+            else if (povijestOdabira[1] == 1 && povijestOdabira[4] == 1 && povijestOdabira[7] == 1) {
+                poruka = "Plavi je pobijedio!!";
+                gameOver = true;
+            } else if (povijestOdabira[1] == 0 && povijestOdabira[4] == 0 && povijestOdabira[7] == 0) {
+                poruka = "Crveni je pobijedio!!";
+                gameOver = true;
+            } else if (povijestOdabira[2] == 1 && povijestOdabira[5] == 1 && povijestOdabira[8] == 1) {
+                poruka = "Plavi je pobijedio!!";
+                gameOver = true;
+            } else if (povijestOdabira[2] == 0 && povijestOdabira[5] == 0 && povijestOdabira[8] == 0) {
+                poruka = "Crveni je pobijedio!!";
+                gameOver = true;
+            } else if (povijestOdabira[3] == 1 && povijestOdabira[6] == 1 && povijestOdabira[9] == 1) {
+                poruka = "Plavi je pobijedio!!";
+                gameOver = true;
+            } else if (povijestOdabira[3] == 0 && povijestOdabira[6] == 0 && povijestOdabira[9] == 0) {
+                poruka = "Crveni je pobijedio!!";
+                gameOver = true;
+            }
+            //dijagonalne pobjede
+            else if (povijestOdabira[1] == 1 && povijestOdabira[5] == 1 && povijestOdabira[9] == 1) {
+                poruka = "Plavi je pobijedio!!";
+                gameOver = true;
+            } else if (povijestOdabira[1] == 0 && povijestOdabira[5] == 0 && povijestOdabira[9] == 0) {
+                poruka = "Crveni je pobijedio!!";
+                gameOver = true;
+            } else if (povijestOdabira[3] == 1 && povijestOdabira[5] == 1 && povijestOdabira[7] == 1) {
+                poruka = "Plavi je pobijedio!!";
+                gameOver = true;
+            } else if (povijestOdabira[3] == 0 && povijestOdabira[5] == 0 && povijestOdabira[7] == 0) {
+                poruka = "Crveni je pobijedio!!";
+                gameOver = true;
+            }
+        }
+
+        function igra(id) {
+            if (redIgrača % 2 != 0) {
+                document.getElementById(id).style.backgroundColor = "blue";
+                povijestOdabira[id] = 1;
+            } else {
+                document.getElementById(id).style.backgroundColor = "red";
+                povijestOdabira[id] = 0;
+            }
+            redIgrača++;
+            provjeraStanja();
+            if (redIgrača == 10) {
+                poruka = "Neriješeno! Pokušajte ponovo";
+                gameOver = true;
+            }
+            if (gameOver) {
+                alert("Kraj igre!\n" + poruka);
+                // document
+            }
+        }
+    </script>
+
+    <table id="tablica" style="width: 500px; height: 515px; margin-left: auto; margin-right: auto; margin-top: 5%; margin-bottom: 0px;">
+        <tr>
+            <th colspan="3" style="font-size: 35px;">Križić Kružić</th>
+        </tr>
+        <tr>
+            <td id="1" onclick="igra(id);">&nbsp;</td>
+            <td id="2" onclick="igra(id);">&nbsp;</td>
+            <td id="3" onclick="igra(id);">&nbsp;</td>
+        </tr>
+        <tr>
+            <td id="4" onclick="igra(id);">&nbsp;</td>
+            <td id="5" onclick="igra(id);">&nbsp;</td>
+            <td id="6" onclick="igra(id);">&nbsp;</td>
+        </tr>
+        <tr>
+            <td id="7" onclick="igra(id);">&nbsp;</td>
+            <td id="8" onclick="igra(id);">&nbsp;</td>
+            <td id="9" onclick="igra(id);">&nbsp;</td>
+        </tr>
+    </table>
+</body>
+
+</html>
